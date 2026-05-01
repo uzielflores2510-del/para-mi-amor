@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Mi amor Laury ✨</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root {
+      --bg1: #fbeffb;
+      --bg2: #c6eaff;
+      --bubble-pink: #ffd6ec;
+      --bubble-purple: #eedcff;
+      --star: #f6d257;
+      --card: #fff7fae0;
+      --shadow: 0 8px 38px #d9adffe0;
+      --main: #c24792;
+    }
+    html,body {
+      margin: 0; padding: 0; width: 100vw; height: 100vh; overflow-x: hidden;
+      background: linear-gradient(135deg,var(--bg1) 60%, var(--bg2) 100%);
+      font-family: 'Quicksand','Comic Sans MS', cursive, sans-serif;
+      min-height: 100vh;
+      box-sizing: border-box;
+    }
+
+    .stars-bg {
+      position: fixed; z-index: 0; width:100vw; height:100vh; top:0; left:0; pointer-events:none;
+      overflow: hidden;
+    }
+    .star {
+      position: absolute; width: 16px; height: 16px; color: var(--star);
+      animation: twinkle 2.7s infinite;
+      font-size: 1.3em;
+      opacity: .65;
+      pointer-events: none;
+    }
+    @keyframes twinkle { 0%,100%{opacity:0.32;} 50%{opacity:1;} }
+
+    .cover {
+      z-index: 2;
+      position: fixed; top: 0; left: 0;
+      width: 100vw; height: 100vh; display: flex;
+      align-items: center; justify-content: center; flex-direction: column;
+      background: linear-gradient(135deg,var(--bg1) 65%,var(--bg2) 98%);
+      transition: opacity .7s;
+    }
+    .cover-inner {
+      background: var(--card);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      padding: 46px 32px 38px 32px;
+      text-align: center;
+      max-width: 335px;
+      width: 90vw;
+      animation: popIn .9s cubic-bezier(.57,1.19,.38,1.01);
+    }
+    .cover h1 { color: var(--main); margin-top:0; font-family: inherit; font-size: 2.2em; }
+    .cover-btn {
+      margin-top: 37px;
+      padding: 17px 54px;
+      font-size: 1.2em;
+      font-weight: bold;
+      background: linear-gradient(90deg,#ffd1ec,#debeff 80%);
+      color: #b32e85;
+      border-radius: 16px;
+      border: none; cursor: pointer;
+      box-shadow: 0 3px 18px #f7d6f877;
+      transition: background 0.22s, color 0.18s;
+    }
+    .cover-btn:hover { background: #fff8fc; color: #d424ae; }
+    .by {
+      color: #baa0e2; margin-top:18px; font-size:1em; opacity: 0.77;
+      letter-spacing: .3px;
+    }
+
+    @keyframes popIn {
+      0% { opacity:0; transform: scale(.88) translateY(180px);}
+      100% { opacity:1; transform: scale(1) translateY(0);}
+    }
+
+    .card {
+      position: absolute;
+      top: 60px; left: 50%; transform: translateX(-50%);
+      background: var(--card);
+      box-shadow: var(--shadow);
+      border-radius: 30px;
+      max-width: 405px;
+      width: 93vw;
+      z-index: 5;
+      min-height: 270px;
+      padding: 0 0 44px 0;
+    }
+    @media (max-width: 540px){
+      .card {top:17vw;}
+      .bubble,.card {max-width:97vw;}
+    }
+
+    .bubbles {
+      margin-top: 55px; margin-bottom:18px;
+      display: flex; flex-direction:column; align-items:center;
+      min-height: 220px;
+    }
+    .bubble {
+      background: var(--bubble-pink);
+      color: #c82168;
+      font-size: 1.19em;
+      border-radius: 29px;
+      margin-bottom: 16px;
+      padding: 13px 29px;
+      box-shadow: 0 2px 22px #fab8ea44;
+      max-width: 330px;
+      min-width: 150px;
+      min-height: 48px;
+      animation: floatIn 0.9s cubic-bezier(.3,1.24,.63,1.1);
+      opacity: 0;
+      transform: translateY(35px) scale(.9);
+      transition: opacity 0.22s,transform 0.22s;
+      font-family: inherit;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .bubble.show {
+      opacity: 1; transform: translateY(0) scale(1.02);
+    }
+    @keyframes floatIn {
+      from { opacity: 0; transform: translateY(50px) scale(.89);}
+      to { opacity: 1; transform: translateY(0) scale(1.02);}
+    }
+    .mini-star {font-size:1.1em; margin:0 7px;}
+    .bubble:nth-child(even) { background: var(--bubble-purple); color: #7c08a2; }
+    .bubble-important {
+      background: linear-gradient(90deg,#ffe7f3 62%,#d9eaff 98%);
+      color: #de17b0;
+      font-size: 1.22em;
+      font-weight: bold;
+      box-shadow: 0 2px 32px #fad7f7cc;
+    }
+    .star-game-box {
+      margin: 24px 0 0 0;
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .shooting-star {
+      cursor: pointer;
+      font-size: 2.9em;
+      color: #ffe387;
+      filter: drop-shadow(0 3px 12px #ffe067a0);
+      animation: flyStar 1.6s cubic-bezier(.2,.77,.86,1.21) infinite alternate;
+      margin-bottom: 0;
+      margin-top: 7px;
+      transition: transform 0.25s;
+    }
+    .shooting-star:hover {
+      transform: scale(1.16) rotate(-12deg);
+      color: #f5bf2c;
+    }
+    @keyframes flyStar {
+      0% {transform: translateY(0);}
+      100% {transform: translateY(-18px) rotate(-28deg);}
+    }
+    .star-hint {
+      font-size: 1em; color: #b59631;
+      margin-bottom: 8px;
+      margin-top: 2px;
+      font-style: italic;
+      opacity:.72;
+    }
+    .question-box {
+      display: flex; flex-direction: column; align-items: center;
+      margin: 38px 0 8px 0;
+    }
+    .pregunta {
+      font-size: 1.21em; color: #6b28ca;
+      font-weight: bold;
+      background: #f2e4ffcb;
+      border-radius: 14px;
+      box-shadow: 0 2px 12px #ecd6ffb0;
+      padding: 15px 20px 14px 20px;
+      margin-bottom: 28px;
+      text-align: center;
+      word-break: break-word;
+    }
+    .answer-btn {
+      margin: 11px 18px 0 18px;
+      padding: 14px 32px;
+      font-size:1.07em;
+      font-weight:bold;
+      border-radius:14px;
+      background: linear-gradient(92deg,#f8bfff,#fffa96);
+      border:none;
+      color: #d12b8c;
+      box-shadow: 0 2px 8px #ffdcf388;
+      transition: background 0.21s, color 0.13s;
+      cursor: pointer;
+      min-width: 112px;
+    }
+    .answer-btn:hover {
+      background: #fffad4; color: #b27713;
+    }
+    .respuesta-final {
+      margin: 38px 0 26px 0;
+      font-size: 1.22em;
+      font-weight: bold;
+      color: #d62a8f;
+      background: linear-gradient(92deg,#fff0fd,#e3f7ff 90%);
+      border-radius: 16px;
+      box-shadow: 0 2px 20px #f9e9ff69;
+      padding: 22px 20px 20px 20px;
+      text-align: center;
+      transition: opacity 0.4s;
+      opacity: 0;
+    }
+    .respuesta-final.active { opacity: 1;}
+    .corazon-grande {
+      font-size: 3.3em;
+      margin-top: 18px;
+      text-shadow: 0 3px 18px #faa3fb65;
+      position: relative;
+      animation: boomBoom 0.85s ease-in-out infinite alternate;
+    }
+    @keyframes boomBoom {
+      0% { transform: scale(.99);}
+      100% { transform: scale(1.13);}
+    }
+  </style>
+</head>
+<body>
+  <!-- FONDO DE ESTRELLAS/FLORES -->
+  <div class="stars-bg" id="stars-bg"></div>
+  <!-- PORTADA -->
+  <div class="cover" id="cover">
+    <div class="cover-inner">
+      <h1>Sólo para<br><span style="color:#a73dc8;">mi amor Laury</span></h1>
+      <div style="font-size:1.8em; margin-bottom:10px;">🌛✨💗✨🌸</div>
+      <button class="cover-btn" onclick="openCarta()">Entrar</button>
+      <div class="by">
+        (Toca sólo si eres la dueña de mi futuro y mi corazón 💖)
+      </div>
+    </div>
+  </div>
+  <!-- CARTA ANIMADA Y JUEGO -->
+  <div class="card" id="card" style="display:none;">
+    <div class="bubbles" id="bubbles">
+      <!-- Burbujas se agregan con JS -->
+    </div>
+    <div class="star-game-box" id="star-game" style="display:none;">
+      <div class="star-hint">¡Toca la estrella fugaz para desbloquear la pregunta final!</div>
+      <div class="shooting-star" id="shootingStar" title="Tócame">🌠</div>
+    </div>
+    <div class="question-box" id="quest-box" style="display:none;">
+      <div class="pregunta" id="pregunta">¿Quieres construir un futuro juntos, mi amor Laury?</div>
+      <div>
+        <button class="answer-btn" onclick="showFinal('si')">¡Por supuesto!</button>
+        <button class="answer-btn" onclick="showFinal('no')">Te atrapo igual, mi amor 😘</button>
+      </div>
+    </div>
+    <div class="respuesta-final" id="respuesta-final"></div>
+    <div class="corazon-grande" id="corazon" style="display:none;">💖</div>
+  </div>
+  <script>
+    // BG de estrellas animadas
+    function createStarsBG() {
+      const container = document.getElementById('stars-bg');
+      for (let i=0; i<28; i++) {
+        const s = document.createElement('div');
+        s.className = 'star';
+        s.style.left = Math.random()*98+'vw';
+        s.style.top = (Math.random()*98)+'vh';
+        s.style.fontSize = (Math.random()*1+1.1)+'em';
+        s.textContent = (Math.random()<.65) ? '✦' : (Math.random()<0.5 ? '⭐': '✧');
+        s.style.animationDelay = (Math.random()*2.2)+'s';
+        container.appendChild(s);
+      }
+    }
+    createStarsBG();
+
+    // Burbujas de la carta animada
+    const phrases = [
+      "Hola, mi amor Laury 🌸",
+      "Cada día contigo es mi regalo favorito",
+      "No puedo imaginar mi futuro sin ti",
+      "Un futuro a tu lado es lo que más deseo, mi amorcito",
+      "Eres mi carita preciosa y lo más lindo que he visto",
+      "Tu sonrisa ilumina cualquier lugar, eres la alegría de mi vida",
+      "Eres mi motivo a seguir cada día",
+      "Contigo todos mis sueños tienen sentido",
+      "Gracias por existir, gracias por amar así",
+      "Solo sé que te amo con todo mi ser 💖",
+      "— Eres mi amor, la mitad de mi mundo y todo mi corazón."
+    ];
+
+    let bubbleIdx = 0;
+    function showNextBubble() {
+      if(bubbleIdx < phrases.length) {
+        const b = document.createElement('div');
+        b.className = "bubble" + (bubbleIdx === phrases.length-1 ? " bubble-important":"");
+        b.innerHTML = phrases[bubbleIdx];
+        document.getElementById('bubbles').appendChild(b);
+        setTimeout(()=>b.classList.add('show'),10);
+        bubbleIdx++;
+        if (bubbleIdx < phrases.length) {
+          setTimeout(showNextBubble, 1250 + Math.random()*400);
+        } else {
+          setTimeout(()=>document.getElementById('star-game').style.display='flex', 900);
+        }
+      }
+    }
+
+    // Portada
+    function openCarta() {
+      document.getElementById('cover').style.opacity = 0;
+      setTimeout(()=>{document.getElementById('cover').style.display='none';},800);
+      document.getElementById('card').style.display='block';
+      setTimeout(showNextBubble, 900);
+    }
+
+    // Juego de la estrella fugaz
+    document.getElementById('shootingStar').onclick = function() {
+      document.getElementById('star-game').style.display='none';
+      document.getElementById('quest-box').style.display='flex';
+    };
+
+    // Mostrar respuesta final
+    function showFinal(ans) {
+      let final = document.getElementById('respuesta-final');
+      final.classList.remove("active");
+      let corazon = document.getElementById('corazon');
+      corazon.style.display = 'none';
+      setTimeout(()=>{
+        if(ans === 'si') {
+          final.innerHTML = `¡Gracias por existir, mi amor Laury!<br>Es un honor construir este futuro de la mano contigo.<br><br>Te amo infinitamente 💗`;
+        } else {
+          final.innerHTML = `Demasiado tarde, mi amor.<br>Ya eres mía para siempre.<br>¡Te secuestro a un futuro lleno de amor! 😏<br><br>Te amo más de lo que imaginas.`;
+        }
+        final.classList.add("active");
+        corazon.style.display = '';
+      }, 280);
+    }
+  </script>
+</body>
+</html>
